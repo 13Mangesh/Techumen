@@ -1,9 +1,63 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab Three
+      View Participant
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content class = "ion-padding">
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="Pull to refresh"
+          refreshingSpinner="circles"
+          refreshingText="Refreshing...">
+        </ion-refresher-content>
+      </ion-refresher>
+  <ion-button class="center" (click)="scanCode()" *ngIf="!participantID">
+    Scan Code
+  </ion-button>
+  <div *ngIf="!participantID">
+    <p>Ethical Hacking Workshop: {{ ethicalWorkshop }}</p>
+    <p>Codigo - Expert: {{ codigoExpert }}</p>
+    <p>Codigo - Novice: {{ codigoNovice }}</p>
+    <p>Prezentium: {{ Prezentium }}</p>
+    <p>Web-O-Illusion: {{ webWorkshop }}</p>
+    <p>Eliptas: {{ Eliptas }}</p>
+    <p>Auslander: {{ Auslander }}</p>
+    <p>Counter Strike: {{ counterStrike }}</p>
+    <p>NFS - 3 Man match: {{ nfs3 }}</p>
+    <p>NFS - 1 VS 1: {{ nfs1 }}</p>
+    <p>NFS - Tournament: {{ nfsT }}</p>
+    <p>Mini Militia: {{ miniMilitia }}</p>
+    <p>PUBG - solo: {{ pubgSolo }}</p>
+    <p>PUBG - squad: {{ pubgSquad }}</p>
+    <p>PUBG - tdm: {{ pubgTdm }}</p>
+  </div>
+
+  <div *ngIf="participantID">
+    <h5>Name: {{ participant.name }}</h5>
+    <p *ngIf="participant.teamMate">Team-mate: {{ participant.teamMate }}</p>
+    Email: {{ participant.email }}
+    <br>
+    College: {{ participant.college }}
+    <br>
+    Mobile: {{ participant.mobile }}
+    <ion-list>
+      Participated events: 
+      <ion-item *ngFor="let event of eventList">
+        {{ event.eventName }}
+      </ion-item>
+    </ion-list>
+    <br>
+    Paid Amount: {{ participant.paidMoney }}
+    <br>
+    Unpaid Amount: {{ participant.unpaidMoney }}
+    <br>
+    Entry Taker: {{ participant.entryTaker }}
+    <br>
+
+    <ion-button margin (click) = scanAnother()>Scan Another</ion-button>
+  </div>
+</ion-content>

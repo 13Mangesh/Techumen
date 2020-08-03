@@ -1,9 +1,81 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab Two
+      Add Participant
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content class= "ion-padding">
+  <form (ngSubmit) = "onSubmit(f)" #f = "ngForm">
+    <ion-item>
+      <ion-label position = "floating">Name</ion-label>
+      <ion-input
+        type = "text"
+        ngModel
+        name = "name"
+        required
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position = "floating">College</ion-label>
+      <ion-input
+        type = "text"
+        ngModel
+        name = "college"
+        required
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position = "floating">Number</ion-label>
+      <ion-input
+        type = "number"
+        ngModel
+        name = "number"
+        required
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position = "floating">Email</ion-label>
+      <ion-input
+        type = "text"
+        ngModel
+        name = "email"
+        email
+        required
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position = "floating">Team mate (optional)</ion-label>
+      <ion-input
+        type = "text"
+        ngModel
+        name = "teamMate"
+      ></ion-input>
+    </ion-item>
+    <h3 class = "ion-margin-top">Events:</h3>
+    <ion-item *ngFor = "let event of eventList">
+      <ion-label>{{ event.eventName }}</ion-label>
+      <ion-checkbox color = "dark" name = "checkboxes" (click) = "selectMember(event)" [(ngModel)] = "event.ischecked"></ion-checkbox>
+    </ion-item>
+    
+    <ion-item margin-top>
+      <ion-label position = "floating">paid money</ion-label>
+      <ion-input
+        type = "number"
+        ngModel
+        name = "paidMoney"
+        required
+      ></ion-input>
+    </ion-item>
+    <ion-button
+       class="ion-float-end"
+       shape="round"
+       [disabled]="!f.valid"
+       type = "submit"
+       margin
+      ><ion-icon slot="start" name="checkmark"></ion-icon>Save</ion-button>
+  </form>
+  <!-- <ion-input [(ngModel)] = "encodedData"></ion-input>
+  <ion-img *ngIf="!encodedimg" [src]="encodedimg"></ion-img> -->
+</ion-content>
